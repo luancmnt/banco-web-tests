@@ -1,11 +1,7 @@
 describe('Transfers', () => {
     beforeEach(() => {
         cy.visit('/')
-        cy.fixture('credenciais').then(credenciais => {
-            cy.get('#username').click().type(credenciais.valida.usuario)
-            cy.get('#senha').click().type(credenciais.valida.senha)
-        })
-        cy.contains('button', 'Entrar').click()
+        cy.loginWithValidData()
     })
 
     it('Should perform the transfer when valid data and amount are entered', () => {
@@ -21,6 +17,6 @@ describe('Transfers', () => {
 
         cy.contains('button', 'Transferir').click()
 
-        cy.get('.toast').should('have.text', 'Transferência realizada!')
+        cy.checkToastMessage('Transferência realizada!')
     })
 })
